@@ -1,12 +1,12 @@
 .PHONY: watch, start, update
 
-index.html: slides.md
-	npx @marp-team/marp-cli@latest slides.md -o index.html
+index.html: slides.md styles.css
+	npx cleaver@latest slides.md
 
 slides: index.html
 
 watch:
-	npx @marp-team/marp-cli@latest -w slides.md -o index.html
+	npx cleaver@latest watch slides.md
 
 start:
 	npm i --prefix tasks
