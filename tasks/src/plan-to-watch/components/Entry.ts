@@ -38,11 +38,7 @@ export class PlanToWatchEntry extends HTMLElement {
     super();
   }
 
-  private _entry: Entry | null = null;
-  set entry(entry: Entry) {
-    this._entry = entry;
-  }
-
+  public entry: Entry | null = null;
   public list: ListStore | null = null;
 
   public connectedCallback() {
@@ -162,43 +158,45 @@ export class PlanToWatchEntry extends HTMLElement {
   }
 
   private renderName() {
-    if (!this._entry) return;
+    if (!this.entry) return;
     const nameElement = this.querySelector<HTMLSpanElement>(`.${classes.name}`);
     if (nameElement) {
-      nameElement.textContent = this._entry.name;
+      nameElement.textContent = this.entry.name;
     }
   }
 
   private renderStatus() {
-    if (!this._entry) return;
+    // TODO: код внутри этого метода должен вызываться автоматически при изменении значений, от которых он зависит
+    if (!this.entry) return;
     const statusElement = this.querySelector<HTMLSelectElement>(
       `.${classes.status}`
     );
     if (statusElement) {
-      statusElement.value = this._entry.status;
+      statusElement.value = this.entry.status;
     }
   }
 
   private renderEpisodeSeen() {
-    if (!this._entry) return;
+    // TODO: код внутри этого метода должен вызываться автоматически при изменении значений, от которых он зависит
+    if (!this.entry) return;
     const episodeElement = this.querySelector<HTMLInputElement>(
       `.${classes.episodesSeen}`
     );
     if (episodeElement) {
-      episodeElement.value = this._entry.episodesSeen.toString();
-      if (this._entry.episodeCount) {
-        episodeElement.max = this._entry.episodeCount.toString();
+      episodeElement.value = this.entry.episodesSeen.toString();
+      if (this.entry.episodeCount) {
+        episodeElement.max = this.entry.episodeCount.toString();
       }
     }
   }
 
   private renderEpisodeCount() {
-    if (!this._entry) return;
+    if (!this.entry) return;
     const episodeElement = this.querySelector<HTMLSpanElement>(
       `.${classes.episodeCount}`
     );
     if (episodeElement) {
-      episodeElement.textContent = this._entry.episodeCount?.toString() ?? "?";
+      episodeElement.textContent = this.entry.episodeCount?.toString() ?? "?";
     }
   }
 }

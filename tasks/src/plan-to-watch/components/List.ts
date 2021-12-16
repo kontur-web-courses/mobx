@@ -57,8 +57,11 @@ export class PlanToWatchList extends HTMLElement {
   }
 
   private renderList() {
+    // TODO: код внутри этого метода должен вызываться автоматически при изменении значений, от которых он зависит
     const listElement = this.querySelector<HTMLDivElement>(`.${classes.list}`);
     if (!listElement || !this.list) return;
+    // NOTE: не делай так в реальной жизни, это теряет состояние фокуса и делает слишком много работы,
+    // это учебная задачка, а в бою за тебя постарается фреймворк 🤷
     listElement.innerHTML = "";
     for (const id of this.list.showing) {
       const entry = this.list.entries.get(id);
@@ -76,6 +79,7 @@ export class PlanToWatchList extends HTMLElement {
   }
 
   private renderTotal() {
+    // TODO: код внутри этого метода должен вызываться автоматически при изменении значений, от которых он зависит
     const totalElement = this.querySelector<HTMLDivElement>(
       `.${classes.total}`
     );

@@ -30,11 +30,11 @@ export class PlanToWatchInput extends HTMLElement {
   public list: ListStore | null = null;
 
   public connectedCallback() {
-    // TODO: сделать так, чтобы этот метод звался автоматически
     this.render();
   }
 
   private render() {
+    // TODO: код внутри этого метода должен вызываться автоматически при изменении значений, от которых он зависит
     this.innerHTML = "";
     this.unsubscribe();
     if (this.list?.isAdding) {

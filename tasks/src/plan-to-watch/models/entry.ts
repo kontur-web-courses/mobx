@@ -23,9 +23,7 @@ export class Entry implements IEntry {
     makeObservable(this, {
       // TODO: добавь сюда немного магии
     });
-    if ("id" in entry) {
-      this.id = entry.id;
-    }
+    this.id = entry.id;
     this.name = entry.name;
     this.status = entry.status;
     this.episodesSeen = entry.episodesSeen;
@@ -56,7 +54,8 @@ export class Entry implements IEntry {
   public episodesSeen: number;
   public episodeCount?: number;
 
-  public inrementEpisode() {}
+  // TODO: допиши логику этих методов
+  public incrementEpisode() {}
   public decrementEpisode() {}
   public setEpisode(newEpisode: number) {}
   public setStatus(status: Status) {}

@@ -27,7 +27,6 @@ export class PlanToWatchNavigation extends HTMLElement {
   public connectedCallback() {
     this.appendChild(template.content.cloneNode(true));
     this.listenLinks();
-    // TODO: сделать так, чтобы этот метод звался автоматически
     this.renderActive();
   }
 
@@ -39,12 +38,14 @@ export class PlanToWatchNavigation extends HTMLElement {
       linkElement.addEventListener("click", (e) => {
         const target = e.currentTarget! as HTMLAnchorElement;
         const status = target.dataset.id as Status;
+        // TODO: Добавить логику
         console.log("show: ", status);
       });
     }
   }
 
   private renderActive() {
+    // TODO: код внутри этого метода должен вызываться автоматически при изменении значений, от которых он зависит
     if (!this.list) return;
     const links = this.querySelectorAll<HTMLAnchorElement>(
       `.${classes.status}`
