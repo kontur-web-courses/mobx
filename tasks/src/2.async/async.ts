@@ -19,7 +19,17 @@ class CatsStore {
   static defaultText = "hello";
 
   constructor() {
-    makeObservable(this, {});
+    makeObservable(this, {
+      tag: observable,
+      setTag: action,
+      text: observable,
+      setText: action,
+      tags: observable,
+      loadingTags: observable,
+      catUrl: observable,
+      loadingCat: observable,
+      loadCat: flow,
+    });
   }
 
   tag: string = CatsStore.defaultTag;
@@ -36,29 +46,35 @@ class CatsStore {
   loadingTags: boolean = false;
   async loadTags() {
     try {
-      this.loadingTags = true;
+      runInAction(() => {
+        this.loadingTags = true;
+      });
       const response = await fetch("https://cataas.com/api/tags");
       const tags = await response.json();
-      this.loadingTags = false;
-      this.tags = tags;
+      runInAction(() => {
+        this.loadingTags = false;
+        this.tags = tags;
+      });
     } catch (err) {
-      this.loadingTags = false;
-      this.tags = [];
+      runInAction(() => {
+        this.loadingTags = false;
+        this.tags = [];
+      });
     }
   }
 
   catUrl: string = "";
   loadingCat: boolean = false;
-  async loadCat(tag: string, text: string, signal: AbortSignal) {
+  *loadCat(tag: string, text: string, signal: AbortSignal) {
     try {
       this.loadingCat = true;
-      const response: Response = await fetch(
+      const response: Response = yield fetch(
         `https://cataas.com/cat/${encodeURIComponent(
           tag
         )}/says/${encodeURIComponent(text)}`,
         { signal }
       );
-      const blob: Blob = await response.blob();
+      const blob: Blob = yield response.blob();
       const url = URL.createObjectURL(blob);
       this.loadingCat = false;
       this.catUrl = url;
@@ -157,13 +173,17 @@ export function render(rootElement: HTMLElement) {
   autorun(() => {
     ac.abort();
     ac = new AbortController();
-    const promise: MaybeCancellable = store.loadCat(
+    const promise: MaybeCancellable = store.getCat(
       store.tag,
       store.text,
       ac.signal
     );
     ac.signal.addEventListener("abort", () => promise.cancel?.(), {
       once: true,
+    });
+    promise.catch((err) => {
+      if (isFlowCancellationError(err) || ac.signal.aborted) return;
+      console.error(err);
     });
   });
 
