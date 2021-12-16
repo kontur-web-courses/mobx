@@ -14,16 +14,15 @@ export function render(rootElement: HTMLElement) {
   field.readOnly = true;
   field.type = "number";
   field.className = "counter";
-  // TODO: избавиться от ручного обновления
-  field.value = counter.get().toString();
+  autorun(() => {
+    field.value = counter.get().toString();
+  });
 
   const inc = document.createElement("button");
   inc.innerText = "increment";
   inc.className = "increment";
   inc.addEventListener("click", () => {
     increment();
-    // TODO: избавиться от ручного обновления
-    field.value = counter.get().toString();
   });
 
   const dec = document.createElement("button");
@@ -31,8 +30,6 @@ export function render(rootElement: HTMLElement) {
   dec.className = "decrement";
   dec.addEventListener("click", () => {
     decrement();
-    // TODO: избавиться от ручного обновления
-    field.value = counter.get().toString();
   });
 
   const fragment = document.createDocumentFragment();

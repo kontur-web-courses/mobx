@@ -7,21 +7,21 @@ interface Reaction {
   run(): void;
 }
 
-// let currentReaction: Reaction | null = null;
+let currentReaction: Reaction | null = null;
 
 export function box<T>(initial: T) {
   let value = initial;
   return {
     observers: [],
     get() {
-      // if (currentReaction) currentReaction.observing.push(this);
+      if (currentReaction) currentReaction.observing.push(this);
       return value;
     },
     set(this: Observable, newValue: T) {
       value = newValue;
-      // const { observers } = this;
-      // this.observers = [];
-      // observers.forEach((r) => r.run());
+      const { observers } = this;
+      this.observers = [];
+      observers.forEach((r) => r.run());
     },
   };
 }
@@ -30,13 +30,13 @@ export function autorun(effect: () => void) {
   const reaction = {
     observing: [],
     run(this: Reaction) {
-      // currentReaction = this;
-      // this.observing = [];
+      currentReaction = this;
+      this.observing = [];
       effect();
-      // this.observing.forEach((observable) => {
-      //   observable.observers.push(this);
-      // });
-      // currentReaction = null;
+      this.observing.forEach((observable) => {
+        observable.observers.push(this);
+      });
+      currentReaction = null;
     },
   };
   return reaction.run();
