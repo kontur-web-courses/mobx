@@ -1,3 +1,4 @@
+import { autorun } from "mobx";
 import type { Entry } from "../models/entry";
 import { Status } from "../models/entry";
 import type { ListStore } from "../models/list";
@@ -74,6 +75,7 @@ export class PlanToWatchEntry extends HTMLElement {
         const value = target.value as Status;
         // TODO: Добавить логику
         console.log("status: ", value);
+        this.entry?.setStatus(value);
       };
       statusElement.addEventListener("change", callback);
       this.unsubscribe.push(() =>
@@ -94,6 +96,7 @@ export class PlanToWatchEntry extends HTMLElement {
         const value = data.get("episodesSeen");
         // TODO: Добавить логику
         console.log("episodesSeen:", value);
+        this.entry?.setEpisode(parseInt(value as string, 10));
       };
       episodeFormElement.addEventListener("submit", callback);
       this.unsubscribe.push(() =>
@@ -110,6 +113,7 @@ export class PlanToWatchEntry extends HTMLElement {
       const callback = () => {
         // TODO: Добавить логику
         console.log("increment");
+        this.entry?.incrementEpisode();
       };
       incrementElement.addEventListener("click", callback);
       this.unsubscribe.push(() =>
@@ -126,6 +130,7 @@ export class PlanToWatchEntry extends HTMLElement {
       const callback = () => {
         // TODO: Добавить логику
         console.log("decrement");
+        this.entry?.decrementEpisode();
       };
       decrementElement.addEventListener("click", callback);
       this.unsubscribe.push(() =>
@@ -142,6 +147,7 @@ export class PlanToWatchEntry extends HTMLElement {
       const callback = () => {
         // TODO: Добавить логику
         console.log("remove");
+        this.list?.removeEntry(this.entry?.id ?? "id");
       };
       removeElement.addEventListener("click", callback);
       this.unsubscribe.push(() =>
@@ -152,8 +158,16 @@ export class PlanToWatchEntry extends HTMLElement {
 
   private render() {
     this.renderName();
-    this.renderStatus();
-    this.renderEpisodeSeen();
+    this.unsubscribe.push(
+      autorun(() => {
+        this.renderStatus();
+      })
+    );
+    this.unsubscribe.push(
+      autorun(() => {
+        this.renderEpisodeSeen();
+      })
+    );
     this.renderEpisodeCount();
   }
 

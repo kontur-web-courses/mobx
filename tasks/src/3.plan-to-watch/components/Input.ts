@@ -1,5 +1,6 @@
 import classes from "./Input.module.css";
 import type { ListStore } from "../models/list";
+import { autorun } from "mobx";
 
 const nameId = "ptw-input-name";
 const episodeCountId = "ptw-input-episodeCount";
@@ -30,7 +31,9 @@ export class PlanToWatchInput extends HTMLElement {
   public list: ListStore | null = null;
 
   public connectedCallback() {
-    this.render();
+    autorun(() => {
+      this.render();
+    });
   }
 
   private render() {
@@ -62,6 +65,8 @@ export class PlanToWatchInput extends HTMLElement {
           : undefined;
         // TODO: Добавить логику
         console.log("new entry:", { name, episodeCount });
+        this.list?.addEntry({ name, episodeCount });
+        this.list?.setAdding(false);
       };
       formElement.addEventListener("submit", callback);
       this.unsubscribe = () =>
@@ -77,6 +82,7 @@ export class PlanToWatchInput extends HTMLElement {
       const callback = () => {
         // TODO: добавить логику
         console.log("open");
+        this.list?.setAdding(true);
       };
       buttonElement.addEventListener("click", callback);
       this.unsubscribe = () =>

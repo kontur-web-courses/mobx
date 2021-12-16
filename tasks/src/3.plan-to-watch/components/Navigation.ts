@@ -1,3 +1,4 @@
+import { autorun } from "mobx";
 import { Status, ShowAllStatus } from "../models/entry";
 import type { ListStore } from "../models/list";
 import classes from "./Navigation.module.css";
@@ -27,7 +28,9 @@ export class PlanToWatchNavigation extends HTMLElement {
   public connectedCallback() {
     this.appendChild(template.content.cloneNode(true));
     this.listenLinks();
-    this.renderActive();
+    autorun(() => {
+      this.renderActive();
+    });
   }
 
   private listenLinks() {
@@ -40,6 +43,7 @@ export class PlanToWatchNavigation extends HTMLElement {
         const status = target.dataset.id as Status;
         // TODO: Добавить логику
         console.log("show: ", status);
+        this.list?.setMode(status);
       });
     }
   }

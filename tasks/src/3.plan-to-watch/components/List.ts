@@ -3,6 +3,7 @@ import { PlanToWatchInput } from "./Input";
 import { PlanToWatchNavigation } from "./Navigation";
 import { PlanToWatchEntry } from "./Entry";
 import classes from "./List.module.css";
+import { autorun } from "mobx";
 
 const template = document.createElement("template");
 template.innerHTML = `
@@ -32,8 +33,12 @@ export class PlanToWatchList extends HTMLElement {
   private render() {
     this.renderInput();
     this.renderNavigation();
-    this.renderList();
-    this.renderTotal();
+    autorun(() => {
+      this.renderList();
+    });
+    autorun(() => {
+      this.renderTotal();
+    });
   }
 
   private renderNavigation() {

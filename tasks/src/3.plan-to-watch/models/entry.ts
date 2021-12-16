@@ -1,4 +1,4 @@
-import { makeObservable } from "mobx";
+import { makeAutoObservable } from "mobx";
 import { nanoid } from "nanoid";
 
 export const ShowAllStatus = "Show all";
@@ -20,9 +20,7 @@ export interface IEntry {
 
 export class Entry implements IEntry {
   constructor(entry: IEntry) {
-    makeObservable(this, {
-      // TODO: добавь сюда немного магии
-    });
+    makeAutoObservable(this);
     this.id = entry.id;
     this.name = entry.name;
     this.status = entry.status;
@@ -55,8 +53,27 @@ export class Entry implements IEntry {
   public episodeCount?: number = undefined;
 
   // TODO: допиши логику этих методов
-  public incrementEpisode() {}
-  public decrementEpisode() {}
-  public setEpisode(newEpisode: number) {}
-  public setStatus(status: Status) {}
+  public incrementEpisode() {
+    const newEpisode = this.episodesSeen + 1;
+    this.setEpisode(newEpisode);
+  }
+  public decrementEpisode() {
+    const newEpisode = this.episodesSeen - 1;
+    this.setEpisode(newEpisode);
+  }
+  public setEpisode(newEpisode: number) {
+    const lower = 0;
+    const upper = this.episodeCount ?? Number.POSITIVE_INFINITY;
+    const actualEpisode = Math.max(lower, Math.min(newEpisode, upper));
+    this.episodesSeen = actualEpisode;
+    if (this.episodesSeen === this.episodeCount) {
+      this.status = Status.Completed;
+    }
+  }
+  public setStatus(status: Status) {
+    this.status = status;
+    if (status === Status.Completed && this.episodeCount !== undefined) {
+      this.episodesSeen = this.episodeCount;
+    }
+  }
 }

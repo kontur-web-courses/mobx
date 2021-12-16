@@ -1,32 +1,43 @@
-import { makeObservable } from "mobx";
+import { makeAutoObservable } from "mobx";
 import { nanoid } from "nanoid";
 import type { IEntry } from "./entry";
 import { Entry, Status, ShowAllStatus, type IShowAllStatus } from "./entry";
 
 export class ListStore {
   constructor(entries: IEntry[]) {
-    makeObservable(this, {
-      // TODO: добавь сюда немного магии
-    });
+    makeAutoObservable(this);
     this.entries = new Map(
       entries.map((entry) => [entry.id, new Entry(entry)])
     );
-    this.showing = Array.from(this.entries.keys());
-    this.total = this.showing
-      .map((id) => this.entries.get(id)?.episodesSeen ?? 0)
-      .reduce((x, y) => x + y);
   }
 
   public entries: Map<string, Entry> = new Map();
-  public showing: Array<Entry["id"]> = [];
-  public total: number = 0;
+  public get showing(): Array<Entry["id"]> {
+    return [...this.entries.values()]
+      .filter((e) => this.mode === ShowAllStatus || e.status === this.mode)
+      .map((e) => e.id);
+  }
+  public get total(): number {
+    return this.showing
+      .map((id) => this.entries.get(id)?.episodesSeen ?? 0)
+      .reduce((x, y) => x + y);
+  }
   public mode: Status | IShowAllStatus = ShowAllStatus;
   public isAdding: boolean = false;
 
-  addEntry(entry: Pick<IEntry, "name" | "episodeCount">) {}
-  removeEntry(id: Entry["id"]) {}
-  setMode(mode: Status | IShowAllStatus) {}
-  setAdding(newValue: boolean) {}
+  addEntry(entry: Pick<IEntry, "name" | "episodeCount">) {
+    const newEntry = Entry.makeNew(entry);
+    this.entries.set(newEntry.id, newEntry);
+  }
+  removeEntry(id: Entry["id"]) {
+    this.entries.delete(id);
+  }
+  setMode(mode: Status | IShowAllStatus) {
+    this.mode = mode;
+  }
+  setAdding(newValue: boolean) {
+    this.isAdding = newValue;
+  }
 }
 
 export const defaultList = [

@@ -19,7 +19,7 @@ const extractExpression = (value: string): ((grid: Grid) => string) => {
     return `${argument}.read(${x}, ${y})`;
   });
   try {
-    return new Function(argument, `return ${expression}`) as any;
+    return new Function(argument, `return String(${expression})`) as any;
   } catch (e) {
     return () => errorMessage;
   }
