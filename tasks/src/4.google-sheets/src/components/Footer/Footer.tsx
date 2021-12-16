@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import type { FC } from "react";
 import type { SheetStore } from "../../models/SheetStore";
 import CreateSheetButton from "../CreateSheetButton/CreateSheetButton";
 import SheetNavigation from "../SheetNavigation/SheetNavigation";

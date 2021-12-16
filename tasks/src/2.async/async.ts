@@ -63,7 +63,11 @@ class CatsStore {
       this.loadingCat = false;
       this.catUrl = url;
     } catch (err) {
-      if (isFlowCancellationError(err) || signal.aborted) return;
+      if (
+        (err instanceof Error && isFlowCancellationError(err)) ||
+        signal.aborted
+      )
+        return;
       this.loadingCat = false;
       this.catUrl = "";
     }

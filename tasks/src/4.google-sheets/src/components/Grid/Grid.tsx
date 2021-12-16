@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import React, { FC } from "react";
+import type { FC } from "react";
 import type { Grid as IGrid } from "../../models/Grid";
 import type { Sheet } from "../../models/Sheet";
 import Cell from "../Cell/Cell";

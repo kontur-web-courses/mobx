@@ -1,4 +1,5 @@
-import { computed, IComputedValue, makeObservable } from "mobx";
+import { computed, makeObservable } from "mobx";
+import type { IComputedValue } from "mobx";
 import type { Sheet } from "./Sheet";
 
 const toXY = (idx: number, width: number) => ({

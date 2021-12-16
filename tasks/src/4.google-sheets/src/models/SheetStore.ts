@@ -1,5 +1,5 @@
 import { makeObservable } from "mobx";
-import { Sheet } from "./Sheet";
+import type { Sheet } from "./Sheet";
 
 export class SheetStore {
   public name: string = "Untitled spreadsheet";

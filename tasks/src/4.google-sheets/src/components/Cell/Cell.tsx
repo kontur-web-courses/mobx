@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import React, { ChangeEventHandler, FC } from "react";
+import type { ChangeEventHandler, FC } from "react";
 import type { Grid } from "../../models/Grid";
 import classes from "./Cell.module.css";
 import cs from "classnames";

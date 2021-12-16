@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import React, { FC, MouseEventHandler } from "react";
+import type { FC, MouseEventHandler } from "react";
 import type { Sheet } from "../../models/Sheet";
 import type { SheetStore } from "../../models/SheetStore";
 import classes from "./SheetNavigation.module.css";

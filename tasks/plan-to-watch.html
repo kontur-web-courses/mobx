@@ -4,14 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="/index.css" />
-    <title>API Examples</title>
+    <title>Plan to watch list</title>
   </head>
   <body>
     <script type="module">
-      import "/dist/1.api/api.js";
+      import { render } from "/src/3.plan-to-watch/index.ts";
+      render(document.getElementById("root"));
     </script>
-    <main>
-      <h1>Open the console</h1>
-    </main>
+    <main id="root"></main>
   </body>
 </html>

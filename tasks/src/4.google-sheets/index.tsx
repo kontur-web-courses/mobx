@@ -1,4 +1,4 @@
-import React, { StrictMode } from "react";
+import { StrictMode } from "react";
 import ReactDOM from "react-dom";
 import { configure } from "mobx";
 import "./index.css";
@@ -18,9 +18,3 @@ ReactDOM.render(
   </StrictMode>,
   document.getElementById("root")
 );
-
-// Hot Module Replacement (HMR) - Remove this snippet to remove HMR.
-// Learn more: https://snowpack.dev/concepts/hot-module-replacement
-if (import.meta.hot) {
-  import.meta.hot.accept();
-}

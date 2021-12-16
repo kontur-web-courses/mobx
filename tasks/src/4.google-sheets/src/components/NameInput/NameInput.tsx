@@ -1,6 +1,6 @@
 import { autorun } from "mobx";
 import { observer } from "mobx-react-lite";
-import React, { ChangeEventHandler, FC, useEffect } from "react";
+import { ChangeEventHandler, FC, useEffect } from "react";
 import type { SheetStore } from "../../models/SheetStore";
 import classes from "./NameInput.module.css";
 

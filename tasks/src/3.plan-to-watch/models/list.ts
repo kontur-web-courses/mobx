@@ -1,7 +1,7 @@
 import { makeObservable } from "mobx";
 import { nanoid } from "nanoid";
 import type { IEntry } from "./entry";
-import { Entry, Status, ShowAllStatus, IShowAllStatus } from "./entry";
+import { Entry, Status, ShowAllStatus, type IShowAllStatus } from "./entry";
 
 export class ListStore {
   constructor(entries: IEntry[]) {

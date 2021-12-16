@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import React, { FC } from "react";
+import type { FC } from "react";
 import type { SheetStore } from "../../models/SheetStore";
 import Grid from "../Grid/Grid";
 import GridHeader from "../GridHeader/GridHeader";

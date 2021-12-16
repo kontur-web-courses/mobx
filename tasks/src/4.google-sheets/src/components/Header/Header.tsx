@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import type { FC } from "react";
 import type { SheetStore } from "../../models/SheetStore";
 import NameInput from "../NameInput/NameInput";
 import classes from "./Header.module.css";
