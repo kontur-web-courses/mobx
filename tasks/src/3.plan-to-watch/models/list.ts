@@ -17,9 +17,9 @@ export class ListStore {
       .reduce((x, y) => x + y);
   }
 
-  public entries: Map<string, Entry>;
-  public showing: Array<Entry["id"]>;
-  public total: number;
+  public entries: Map<string, Entry> = new Map();
+  public showing: Array<Entry["id"]> = [];
+  public total: number = 0;
   public mode: Status | IShowAllStatus = ShowAllStatus;
   public isAdding: boolean = false;
 

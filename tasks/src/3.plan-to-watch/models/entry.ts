@@ -49,10 +49,10 @@ export class Entry implements IEntry {
   }
 
   public id: string = nanoid();
-  public name: string;
-  public status: Status;
-  public episodesSeen: number;
-  public episodeCount?: number;
+  public name: string = "";
+  public status: Status = Status.PlanToWatch;
+  public episodesSeen: number = 0;
+  public episodeCount?: number = undefined;
 
   // TODO: допиши логику этих методов
   public incrementEpisode() {}
