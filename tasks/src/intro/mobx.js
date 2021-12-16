@@ -41,10 +41,14 @@ export function observable(target) {
   const keys = Reflect.ownKeys(target);
   // Заменим все свойства объекта на обертки-ячейки
   for (const key of keys) {
-    Reflect.defineProperty(target, key, {
-      get: boxed.get.bind(boxed),
-      set: boxed.set.bind(boxed),
-    });
+    const value = Reflect.get(target, key);
+    if (typeof value !== "function") {
+      const boxed = box(value);
+      Reflect.defineProperty(target, key, {
+        get: boxed.get.bind(boxed),
+        set: boxed.set.bind(boxed),
+      });
+    }
   }
   return target;
 }
