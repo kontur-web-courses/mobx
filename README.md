@@ -21,4 +21,4 @@
 
 ~ N часов
 
-[Презентация]()
+[Презентация](https://nulladdict.github.io/mobx-course/)

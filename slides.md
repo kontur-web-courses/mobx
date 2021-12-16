@@ -12,7 +12,7 @@ style: |
 
 # **MobX**
 
-https://github.com/kontur-courses/mobx
+https://nulladdict.github.io/mobx-course/
 
 ---
 
