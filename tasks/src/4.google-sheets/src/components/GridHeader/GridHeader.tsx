@@ -7,9 +7,9 @@ interface GridHeaderProps {
   grid: Grid;
 }
 
-const GridHeader: FC<GridHeaderProps> = ({ grid }) => {
+const GridHeader: FC<GridHeaderProps> = observer(({ grid }) => {
   const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    // grid.writeSelection(e.target.value);
+    grid.writeSelection(e.target.value);
   };
   return (
     <label className={classes.header}>
@@ -22,6 +22,6 @@ const GridHeader: FC<GridHeaderProps> = ({ grid }) => {
       />
     </label>
   );
-};
+});
 
 export default GridHeader;

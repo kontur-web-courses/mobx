@@ -9,7 +9,6 @@ import { SheetStore } from "./src/models/SheetStore";
 // configure({
 //   enforceActions: "observed",
 //   computedRequiresReaction: true,
-//   reactionRequiresObservable: true,
 //   observableRequiresReaction: true,
 // });
 

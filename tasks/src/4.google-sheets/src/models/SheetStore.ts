@@ -25,7 +25,7 @@ export class SheetStore {
   }
 
   public duplicateSheet(sheet: Sheet) {
-    // TODO: Создай новый лист и скопируй туда поля .name, .favorite, и grid.values
+    // TODO: Создай новый лист и скопируй туда поля .name и grid.values
   }
 
   public rename(newName: string) {

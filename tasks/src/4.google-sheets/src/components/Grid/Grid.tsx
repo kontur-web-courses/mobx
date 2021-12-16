@@ -9,7 +9,7 @@ interface GridProps {
   sheet: Sheet;
 }
 
-const Grid: FC<GridProps> = ({ sheet }) => {
+const Grid: FC<GridProps> = observer(({ sheet }) => {
   const onKeyDown: React.KeyboardEventHandler<HTMLElement> = (e) => {
     if (document.activeElement instanceof HTMLInputElement) return;
     switch (e.key) {
@@ -39,7 +39,7 @@ const Grid: FC<GridProps> = ({ sheet }) => {
       </div>
     </section>
   );
-};
+});
 
 const getKey = (grid: IGrid, idx: number) =>
   `${grid.width}x${grid.height}:${idx}`;

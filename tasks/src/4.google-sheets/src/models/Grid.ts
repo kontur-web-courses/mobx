@@ -11,7 +11,7 @@ const argument = "$__$";
 const errorMessage = "#Error";
 // Работает на темной магии регулярных выражений, мета-программировании и честном слове разработчика
 // Позволяет использовать [x;y], как ссылку на ячейку, где x и y — ее координаты
-const extractExpression = (value: string) => {
+const extractExpression = (value: string): ((grid: Grid) => string) => {
   const indexRegex = /\[\d+;\d+\]/gi;
   const expression = value.slice(1).replace(indexRegex, (v) => {
     const [x, y] = v.replace(/[^\d;]/gi, "").split(";");
@@ -88,7 +88,7 @@ export class Grid {
     if (value.startsWith("=")) {
       // TODO: превратить значение в функцию, которая принимает this
       // и вычисляет выражение можно с помощью extractExpression
-      // TODO: полученную функцию нужно обернуть в callback с передачей this первым параметров
+      // TODO: полученную функцию нужно обернуть в callback, который передаёт this,
       // а затем в computed, чтобы получилось вычисляемое значение
       // Полученный объект нужно положить в поле .computed
     }
