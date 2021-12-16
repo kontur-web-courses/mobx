@@ -19,6 +19,6 @@
 
 ## Очная встреча
 
-~ N часов
+~ 8 часов
 
-[Презентация](https://nulladdict.github.io/mobx-course/)
+[Презентация](https://kontur-web-courses.github.io/mobx/)
