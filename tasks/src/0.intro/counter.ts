@@ -1,24 +1,21 @@
 import "./intro.css";
 import { box, autorun, observable } from "./mobx.js";
 
-// TODO: это должно будет лежать внутри box
-let counter = 0;
-
+let counter = box(0);
 function increment() {
-  counter += 1;
+  counter.set(counter.get() + 1);
 }
-
 function decrement() {
-  counter -= 1;
+  counter.set(counter.get() - 1);
 }
 
-export function render(rootElement) {
+export function render(rootElement: HTMLElement) {
   const field = document.createElement("input");
   field.readOnly = true;
   field.type = "number";
   field.className = "counter";
   // TODO: избавиться от ручного обновления
-  field.value = counter;
+  field.value = counter.get().toString();
 
   const inc = document.createElement("button");
   inc.innerText = "increment";
@@ -26,7 +23,7 @@ export function render(rootElement) {
   inc.addEventListener("click", () => {
     increment();
     // TODO: избавиться от ручного обновления
-    field.value = counter;
+    field.value = counter.get().toString();
   });
 
   const dec = document.createElement("button");
@@ -35,7 +32,7 @@ export function render(rootElement) {
   dec.addEventListener("click", () => {
     decrement();
     // TODO: избавиться от ручного обновления
-    field.value = counter;
+    field.value = counter.get().toString();
   });
 
   const fragment = document.createDocumentFragment();

@@ -1,0 +1,37 @@
+:global(#cats) {
+  display: grid;
+  gap: 1rem;
+  grid-template-areas:
+    "tagLabel tag textLabel text"
+    "cat cat cat cat";
+  justify-items: stretch;
+  max-width: 50rem;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.tagLabel {
+  grid-area: tagLabel;
+}
+
+.tag {
+  grid-area: tag;
+}
+
+.textLabel {
+  grid-area: textLabel;
+}
+
+.text {
+  grid-area: text;
+}
+
+.cat {
+  grid-area: cat;
+  justify-self: center;
+  max-width: 100%;
+}
+
+.cat.loading {
+  opacity: 0.4;
+}

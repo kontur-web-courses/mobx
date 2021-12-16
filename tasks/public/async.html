@@ -4,13 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="/index.css" />
-    <title>Plan to watch list</title>
+    <title>Async Example</title>
   </head>
   <body>
     <script type="module">
-      import { render } from "/dist/3.plan-to-watch/index.js";
-      render(document.getElementById("root"));
+      import { render } from "/dist/2.async/async.js";
+      render(document.getElementById("cats"));
     </script>
-    <main id="root"></main>
+    <main>
+      <div id="cats"></div>
+    </main>
   </body>
 </html>
