@@ -5,12 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="/index.css" />
     <title>Observable Intro</title>
-    <link rel="stylesheet" type="text/css" href="/intro.css" />
   </head>
   <body>
     <script type="module">
-      import * as counter from "/dist/intro/counter.js";
-      counter.render(document.getElementById("counter"));
+      import { render } from "/dist/intro/counter.js";
+      render(document.getElementById("counter"));
     </script>
     <main>
       <div id="counter"></div>

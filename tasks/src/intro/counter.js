@@ -1,3 +1,4 @@
+import "./intro.css";
 import { box, autorun, observable } from "./mobx.js";
 
 let counter = 0;

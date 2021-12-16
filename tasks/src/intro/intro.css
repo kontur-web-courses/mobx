@@ -1,3 +1,11 @@
+:root,
+body {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 #counter + #calculator {
   margin-top: 2rem;
 }

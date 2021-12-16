@@ -1,0 +1,30 @@
+ptw-input {
+  display: contents;
+}
+
+.form {
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 0.25rem;
+  border-radius: 0.25rem;
+  box-shadow: 0 0 0 1px #000;
+}
+
+.form input[type="text"] {
+  max-width: 20rem;
+}
+
+.form input[type="number"] {
+  max-width: 5rem;
+}
+
+.add {
+  margin-top: 0.5rem;
+  max-width: 10rem;
+  text-transform: uppercase;
+}
+
+.open {
+  width: 10rem;
+}

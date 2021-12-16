@@ -1,8 +1,9 @@
 {
-  "include": ["src/google-sheets"],
+  "include": ["src/plan-to-watch", "src/google-sheets", "src/types"],
   "compilerOptions": {
     "module": "esnext",
     "target": "esnext",
+    "lib": ["esnext", "dom", "dom.iterable", "webworker"],
     "moduleResolution": "node",
     "jsx": "preserve",
     "baseUrl": "./",

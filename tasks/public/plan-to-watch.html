@@ -4,16 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="/index.css" />
-    <title>MobX API</title>
-    <link rel="stylesheet" type="text/css" href="/mobx-basic.css" />
+    <title>Plan to watch list</title>
   </head>
   <body>
     <script type="module">
-      import * as calculator from "/dist/mobx-basic/calculator.js";
-      calculator.render(document.getElementById("calculator"));
+      import { render } from "/dist/plan-to-watch/index.js";
+      render(document.getElementById("root"));
     </script>
-    <main>
-      <div id="calculator"></div>
-    </main>
+    <main id="root"></main>
   </body>
 </html>

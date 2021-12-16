@@ -1,0 +1,22 @@
+ptw-list {
+  display: contents;
+}
+
+.root {
+  min-width: 32rem;
+  max-width: 64rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-rows: auto;
+  grid-gap: 1rem;
+}
+
+.list {
+  counter-reset: list;
+}
+
+.total {
+  margin: 0 0.5rem;
+  text-align: right;
+}
