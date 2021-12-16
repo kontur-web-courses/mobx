@@ -1,7 +1,5 @@
 // TODO: здесь будем хранить текущую реакцию
 let currentlyRunning = null;
-// TODO: здесь будем хранить текущее изменение
-let currentAction = null;
 
 // Ячейка, которая будет хранить состояние и следить за его изменением
 export function box(initial) {

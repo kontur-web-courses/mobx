@@ -1,6 +1,7 @@
 import "./intro.css";
 import { box, autorun, observable } from "./mobx.js";
 
+// TODO: это должно будет лежать внутри box
 let counter = 0;
 
 function increment() {
@@ -10,12 +11,6 @@ function increment() {
 function decrement() {
   counter -= 1;
 }
-
-// Задание:
-// 1. Сделай так, чтобы при изменении значения counter-а не приходилось вручную обновлять состояние элемента.
-//    Для этого придется написать функции box и autorun внутри файла mobx.js
-// 2. Сделай так, чтобы значение хранилось внутри объекта, а измения просходили присваиванием какого-то свойтсва в нем
-//    Для этого пригодится observable.
 
 export function render(rootElement) {
   const field = document.createElement("input");

@@ -6,4 +6,5 @@ index.html: slides.md
 slides: index.html
 
 start:
+	npm i --prefix tasks
 	npm start --prefix tasks
