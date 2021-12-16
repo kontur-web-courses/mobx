@@ -1,5 +1,5 @@
 import { makeObservable } from "mobx";
-import { generateId } from "../utils/id";
+import { nanoid } from "nanoid";
 
 export const ShowAllStatus = "Show all";
 export type IShowAllStatus = typeof ShowAllStatus;
@@ -33,7 +33,7 @@ export class Entry implements IEntry {
   public static makeNew(entry: Pick<IEntry, "name" | "episodeCount">) {
     return new this({
       ...entry,
-      id: generateId(),
+      id: nanoid(),
       episodesSeen: 0,
       status: Status.PlanToWatch,
     });
@@ -48,7 +48,7 @@ export class Entry implements IEntry {
     };
   }
 
-  public id: string = generateId();
+  public id: string = nanoid();
   public name: string;
   public status: Status;
   public episodesSeen: number;
