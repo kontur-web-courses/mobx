@@ -8,14 +8,12 @@ interface AppProps {
   store: SheetStore;
 }
 
-const App: FC<AppProps> = ({ store }) => {
-  return (
-    <>
-      <Header store={store} />
-      <CurrentSheet store={store} />
-      <Footer store={store} />
-    </>
-  );
-};
+const App: FC<AppProps> = ({ store }) => (
+  <>
+    <Header store={store} />
+    <CurrentSheet store={store} />
+    <Footer store={store} />
+  </>
+);
 
 export default App;

@@ -1,4 +1,4 @@
-import { computed, IComputedValue, makeAutoObservable } from "mobx";
+import { computed, IComputedValue, makeObservable } from "mobx";
 import type { Sheet } from "./Sheet";
 
 const toXY = (idx: number, width: number) => ({
@@ -60,6 +60,7 @@ export class Grid {
 
   public isSelected(idx: number): boolean {
     // TODO: допиши сравнение
+    return false;
   }
 
   public readIndex(idx: number) {

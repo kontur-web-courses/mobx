@@ -10,8 +10,8 @@ interface FooterProps {
 
 const Footer: FC<FooterProps> = ({ store }) => (
   <footer className={classes.footer}>
-    <CreateSheetButton />
-    <SheetNavigation />
+    <CreateSheetButton store={store} />
+    <SheetNavigation store={store} />
   </footer>
 );
 

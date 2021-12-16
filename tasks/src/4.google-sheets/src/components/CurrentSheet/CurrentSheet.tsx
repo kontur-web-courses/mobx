@@ -13,7 +13,7 @@ const CurrentSheet: FC<CurrentSheetProps> = ({ store }) => {
   const sheet = store.current;
   return (
     <>
-      {sheet && false ? ( // TODO
+      {sheet ? ( // TODO
         <>
           <GridHeader grid={sheet.grid} />
           <Grid sheet={sheet} />

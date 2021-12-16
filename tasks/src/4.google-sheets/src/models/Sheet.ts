@@ -1,4 +1,4 @@
-import { makeAutoObservable } from "mobx";
+import { makeObservable } from "mobx";
 import { nanoid } from "nanoid";
 import { Grid } from "./Grid";
 import type { SheetStore } from "./SheetStore";

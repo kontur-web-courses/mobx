@@ -6,7 +6,6 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  gap: 0.5rem;
   height: 2.5rem;
   padding: 0 1rem;
   background-color: var(--bg-8);

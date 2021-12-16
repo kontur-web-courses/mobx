@@ -1,9 +1,8 @@
-import { makeAutoObservable } from "mobx";
+import { makeObservable } from "mobx";
 import { Sheet } from "./Sheet";
 
 export class SheetStore {
   public name: string = "Untitled spreadsheet";
-  public favorite: boolean = false;
   public sheets: Array<Sheet> = [];
   public _selected: Sheet["id"] | null = null;
 
@@ -17,7 +16,8 @@ export class SheetStore {
   }
 
   public createSheet(): Sheet["id"] {
-    // TODO: создай новый лист и сохрани в Store
+    // TODO: создай новый лист и сохрани в Store, верни id нового листа
+    return "new-id";
   }
 
   public deleteSheet(sheet: Sheet) {
@@ -29,10 +29,6 @@ export class SheetStore {
   }
 
   public rename(newName: string) {
-    // TODO
-  }
-
-  public setFavorite(newFavorite: boolean) {
     // TODO
   }
 
