@@ -1,0 +1,24 @@
+#counter + #calculator {
+  margin-top: 2rem;
+}
+
+#counter {
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-areas:
+    "c c"
+    "i d";
+  grid-template-columns: repeat(2, 1fr);
+}
+
+#counter .increment {
+  grid-area: i;
+}
+
+#counter .decrement {
+  grid-area: d;
+}
+
+#counter .counter {
+  grid-area: c;
+}
