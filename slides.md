@@ -238,23 +238,23 @@ const disposer = autorun(() => {
 # API. Reactions, правила
 
 - Запускаются синхронно, сразу после изменения,  
-  но не раньше чем закончится самое внешнее действие
+  но не раньше чем закончится самый внешнее action
 - Отслеживается только то, что прочитано синхронно во время запуска функции
-- Не отслеживается то, что прочитано внутри действия
+- Не отслеживается то, что прочитано внутри action-ов
 
 <!-- https://mobx.js.org/reactions.html#rules -->
 
 ---
 
-# API. Асинхронные действия
+# API. Асинхронные action-ы
 
 Есть несколько вариантов:
 
-- Каждый callback в `.then()` должен быть действием
-- Каждому куску кода после `await` нужно отдельное действие
-- Все, что происходит в другом тике оборачивай в действие
-
-Действие === (обернут в `action` / `runInAction`)
+<!-- prettier-ignore -->
+* Каждый коллбек в `.then()` должен быть action-ом
+* Каждому куску кода после `await` нужен отдельный action
+* Все, что в другом тике (setTimeout и друзья) оборачивай в action
+* Используй `action` / `runInAction`
 
 <!-- https://mobx.js.org/actions.html#asynchronous-actions -->
 
@@ -309,7 +309,10 @@ const load = flow(
 );
 ```
 
-<!-- https://mobx.js.org/actions.html#using-flow-instead-of-async--await- -->
+<!--
+https://mobx.js.org/actions.html#using-flow-instead-of-async--await-
+Про генераторы: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*
+-->
 
 ---
 
@@ -348,10 +351,11 @@ const MyComponent = observer((props) => /*…*/);
 
 # Как работает observer()
 
-- Подписывается на все значения, _**прочитанные**_ _внутри_ рендера
-- Ререндерит компонент, когда зависимости меняются
-- Оборачивает в `memo()`
-- Почти как `autorun(() => Component())`
+<!-- prettier-ignore -->
+* Следит за значениями, _**прочитанными**_ _внутри_ рендера
+* Ререндерит компонент, когда зависимости меняются
+* Оборачивает в `memo()`
+* Почти как `autorun(() => Component())`
 
 <!--
 Все значения, которые пришли в компонент, но не были им прочитаны не вызывают лишних рендеров
@@ -365,8 +369,10 @@ const MyComponent = observer((props) => /*…*/);
 
 # Локальное и глобальное состояние
 
-- Нет технических ограничений на то, где "живут" значения
-- Можно передавать в props, читать из контекста или из переменных вне компонента
+- Нет ограничений на то, где "живут" значения
+- Можно передавать в props,  
+  читать из контекста или  
+  из переменных вне компонента
 
 <!-- https://mobx.js.org/react-integration.html#local-and-external-state -->
 
@@ -389,9 +395,13 @@ const ContextThingReader = () => <>{useContext(ThingContext).view}</>;
 
 # Локальное состояние
 
-- Скорее всего хватит того, что дает реакт
-- UI-состояние (лоадеры, выборы, фокусы и т.д.) пусть живет в реакте
-- Профит будет если: состояние глубокое, делится с другими детьми, или есть вычисляемые значения
+<!-- prettier-ignore -->
+* Скорее всего хватит того, что дает реакт
+* UI-состояние (лоадеры, выборы, фокусы и т.д.) пусть живет в реакте
+* Профит от MobX будет если:
+  - состояние глубокое,
+  - делится с другими детьми,
+  - или есть вычисляемые значения
 
 ---
 
@@ -416,12 +426,13 @@ const Component = () => {
 
 # Советы
 
-- Читаешь `observable` — оборачивай в `observer`
-- Читай значения как можно глубже в дереве компонентов
-- Не передавай `observable` в компоненты без `observer` (используй `toJS`, либо читай конкретные значения)
-- Некоторые коллбеки и чтения возможно еще придется обернуть
-- \* Если нужно синхронизировать локальный `observable` с `props`, используй `useEffect`
-- \* Если нужно подписаться в `useEffect`, используй `autorun` (или `reaction`)
+<!-- prettier-ignore -->
+* Читаешь `observable` — оборачивай в `observer`
+* Читай значения как можно глубже в дереве компонентов
+* Не передавай `observable` в компоненты без `observer` (используй `toJS`, либо конкретные свойства)
+* Некоторые коллбеки и чтения возможно еще придется обернуть
+* \* Если нужно синхронизировать локальный `observable` с `props`, используй `useEffect`
+* \* Если нужно подписаться в `useEffect`, используй `autorun` (или `reaction`)
 
 <!-- https://mobx.js.org/react-integration.html#always-read-observables-inside-observer-components -->
 
@@ -429,10 +440,11 @@ const Component = () => {
 
 # Как варить бизнес-лапшу
 
-- MobX не диктует строгих правил того, как должна быть организованы модельки
-- Часто следуют Flux паттерну, и хранят данные в store-ах
-- В приложениях с MobX обычно много моделей, каждая из которых отвечает за какую-то конкретную область знаний и полностью управляет работой с ней
-- Иногда отдельную UI-логику тоже выносят в store
+<!-- prettier-ignore -->
+* MobX не диктует строгих правил того, как должны быть организованы модельки
+* Часто следуют Flux паттерну, и хранят данные в store-ах
+* В приложениях с MobX обычно много моделей, каждая из которых отвечает за какую-то конкретную область знаний и полностью управляет работой с ней
+* Иногда отдельную UI-логику тоже выносят в store
 
 <!-- https://mobx.js.org/defining-data-stores.html -->
 
@@ -440,7 +452,7 @@ const Component = () => {
 
 # React практика
 
-Делаем задачку **google-sheets**
+Делаем задачку **4.google-sheets**
 
 ---
 
@@ -450,4 +462,9 @@ const Component = () => {
 - [Интерактивное введение в MobX](https://mobx.js.org/getting-started)
 - [Видео и выступления](https://github.com/mobxjs/mobx#videos)
 - [MobX 6 cheat sheet ($)](https://gumroad.com/l/fSocU)
-- Избранные главы из документации: [Конфигурация поведения MobX](https://mobx.js.org/configuration.html), [Про реактивность](https://mobx.js.org/understanding-reactivity.html), [Про дебаг и анализ](https://mobx.js.org/analyzing-reactivity.html), [Написание кастомных observable](https://mobx.js.org/custom-observables.html), [Декораторы](https://mobx.js.org/enabling-decorators.html)
+- Избранные главы из документации:
+  - [Конфигурация поведения MobX](https://mobx.js.org/configuration.html)
+  - [Про реактивность](https://mobx.js.org/understanding-reactivity.html)
+  - [Про дебаг и анализ](https://mobx.js.org/analyzing-reactivity.html)
+  - [Написание кастомных observable](https://mobx.js.org/custom-observables.html)
+  - [Декораторы](https://mobx.js.org/enabling-decorators.html)
