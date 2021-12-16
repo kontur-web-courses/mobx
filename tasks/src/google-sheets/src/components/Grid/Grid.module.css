@@ -1,0 +1,17 @@
+.wrapper {
+  width: 100vw;
+  height: calc(100vh - 2.5rem - 2rem - 3rem);
+  overflow: scroll;
+  margin-top: 4.5rem;
+  margin-bottom: 3rem;
+  outline: none;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(var(--width), 8rem);
+  grid-template-rows: repeat(var(--height), 1.5rem);
+  gap: 1px;
+  padding: 0.5rem;
+  overflow: hidden;
+}

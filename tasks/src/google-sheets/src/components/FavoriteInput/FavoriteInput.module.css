@@ -1,0 +1,36 @@
+.favorite {
+  flex-shrink: 0;
+  position: relative;
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+}
+
+.checkbox {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
+
+.star {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  padding: 0.25rem;
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+}
+
+.star::before {
+  content: "☆";
+}
+
+.checkbox:checked ~ .star::before {
+  content: "★";
+  color: #fcc934;
+}
+
+.checkbox:focus-visible ~ .star {
+  border-radius: 0.25rem;
+  box-shadow: inset 0 0 0 2px var(--c-secondary);
+}

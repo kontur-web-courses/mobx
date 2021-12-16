@@ -1,0 +1,13 @@
+.title {
+  width: 15rem;
+  font-size: 1.5rem;
+  padding: 0 0.5rem;
+  border: none;
+  border-radius: 0.25rem;
+  box-shadow: 0 0 0 1px var(--bg-8);
+}
+
+.title:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--c-secondary);
+}

@@ -1,0 +1,15 @@
+.cell {
+  background-color: var(--bg);
+  box-shadow: 0 0 0 1px var(--fg);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.selected.cell {
+  position: relative;
+  overflow: visible;
+  overflow-wrap: break-word;
+  z-index: 1;
+  outline: none;
+  box-shadow: 0 0 0 2px var(--c-secondary);
+}
