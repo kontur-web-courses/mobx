@@ -19,6 +19,7 @@ const Grid: FC<GridProps> = observer(({ sheet }) => {
       case "ArrowUp":
         e.preventDefault();
         // TODO: Позови правильный метод
+        sheet.grid.move(e.key);
         break;
     }
   };

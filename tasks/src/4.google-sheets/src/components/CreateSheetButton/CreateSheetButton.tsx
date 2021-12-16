@@ -13,7 +13,9 @@ const CreateSheetButton: FC<CreateSheetButtonProps> = ({ store }) => (
     className={classes.button}
     onClick={() => {
       // TODO: создай лист
+      const id = store.createSheet();
       // TODO: сделай выбранным
+      store.changeSelected(id);
     }}
   >
     +

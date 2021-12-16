@@ -11,23 +11,27 @@ interface SheetNavigationProps {
   store: SheetStore;
 }
 
-const SheetNavigation: FC<SheetNavigationProps> = ({ store }) => (
+const SheetNavigation: FC<SheetNavigationProps> = observer(({ store }) => (
   <nav>
     <ul className={classes.list}>
       {/*
         Для каждого листа нарисуй <SheetButton />
       */}
+      {store.sheets.map((sheet) => (
+        <SheetButton key={sheet.id} sheet={sheet} />
+      ))}
     </ul>
   </nav>
-);
+));
 
 interface SheetButtonProps {
   sheet: Sheet;
 }
 
-const SheetButton: FC<SheetButtonProps> = ({ sheet }) => {
+const SheetButton: FC<SheetButtonProps> = observer(({ sheet }) => {
   const onClick: MouseEventHandler<HTMLButtonElement> = (e) => {
     console.log("// TODO: select");
+    sheet.select();
   };
   return (
     <li className={classes.item}>
@@ -41,7 +45,7 @@ const SheetButton: FC<SheetButtonProps> = ({ sheet }) => {
       <SheetActions sheet={sheet} />
     </li>
   );
-};
+});
 
 interface SheetActionProps {
   sheet: Sheet;
@@ -50,14 +54,17 @@ interface SheetActionProps {
 const SheetActions: FC<SheetActionProps> = ({ sheet }) => {
   const onDelete = () => {
     console.log("// TODO: delete");
+    sheet.delete();
   };
   const onDuplicate = () => {
     console.log("// TODO: duplicate");
+    sheet.duplicate();
   };
   const onRename = () => {
     const newName = prompt("Enter new sheet name", sheet.name);
     if (newName) {
       console.log("// TODO: rename");
+      sheet.rename(newName);
     }
   };
   return (

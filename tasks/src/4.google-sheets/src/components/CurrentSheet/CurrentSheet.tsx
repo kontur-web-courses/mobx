@@ -9,11 +9,11 @@ interface CurrentSheetProps {
   store: SheetStore;
 }
 
-const CurrentSheet: FC<CurrentSheetProps> = ({ store }) => {
+const CurrentSheet: FC<CurrentSheetProps> = observer(({ store }) => {
   const sheet = store.current;
   return (
     <>
-      {sheet ? ( // TODO
+      {sheet ? (
         <>
           <GridHeader grid={sheet.grid} />
           <Grid sheet={sheet} />
@@ -23,6 +23,6 @@ const CurrentSheet: FC<CurrentSheetProps> = ({ store }) => {
       )}
     </>
   );
-};
+});
 
 export default CurrentSheet;

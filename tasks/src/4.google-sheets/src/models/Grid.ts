@@ -1,4 +1,4 @@
-import { computed, makeObservable } from "mobx";
+import { computed, makeAutoObservable } from "mobx";
 import type { IComputedValue } from "mobx";
 import type { Sheet } from "./Sheet";
 
@@ -43,11 +43,12 @@ export class Grid {
   constructor(sheet: Sheet) {
     // TODO: добавь немного магии
     this.sheet = sheet;
+    makeAutoObservable(this, { sheet: false });
   }
 
   public get idxs() {
     // TODO: верни все ключи массива
-    return [];
+    return [...this.values.keys()];
   }
 
   public get selectionView() {
@@ -61,13 +62,14 @@ export class Grid {
 
   public isSelected(idx: number): boolean {
     // TODO: допиши сравнение
-    return false;
+    return this._selection === idx;
   }
 
   public readIndex(idx: number) {
     const value = this.values[idx];
     try {
       // TODO: если есть, читать из value.computed, иначе из value.raw
+      if (value.computed) return value.computed.get();
       return value.raw;
     } catch {
       return errorMessage;
@@ -81,6 +83,8 @@ export class Grid {
 
   public setSelection(idx: number) {
     // TODO: не забудь обработать выход за границы массива
+    const length = this.values.length;
+    this._selection = (length + idx) % length;
   }
 
   public write(idx: number, value: string) {
@@ -89,9 +93,12 @@ export class Grid {
     if (value.startsWith("=")) {
       // TODO: превратить значение в функцию, которая принимает this
       // и вычисляет выражение можно с помощью extractExpression
+      const expression = extractExpression(value);
       // TODO: полученную функцию нужно обернуть в callback, который передаёт this,
       // а затем в computed, чтобы получилось вычисляемое значение
+      const boxed = computed(() => expression(this));
       // Полученный объект нужно положить в поле .computed
+      this.values[idx].computed = boxed;
     }
   }
 
@@ -104,22 +111,22 @@ export class Grid {
     switch (direction) {
       case "ArrowDown": {
         // TODO: тут нужно изменить на 1 одну из координат
-        this.setSelection(toIdx(x, y, this.width));
+        this.setSelection(toIdx(x + 1, y, this.width));
         break;
       }
       case "ArrowLeft": {
         // TODO: тут нужно изменить на 1 одну из координат
-        this.setSelection(toIdx(x, y, this.width));
+        this.setSelection(toIdx(x, y - 1, this.width));
         break;
       }
       case "ArrowRight": {
         // TODO: тут нужно изменить на 1 одну из координат
-        this.setSelection(toIdx(x, y, this.width));
+        this.setSelection(toIdx(x, y + 1, this.width));
         break;
       }
       case "ArrowUp": {
         // TODO: тут нужно изменить на 1 одну из координат
-        this.setSelection(toIdx(x, y, this.width));
+        this.setSelection(toIdx(x - 1, y, this.width));
         break;
       }
     }

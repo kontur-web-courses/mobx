@@ -1,4 +1,4 @@
-import { makeObservable } from "mobx";
+import { makeAutoObservable } from "mobx";
 import { nanoid } from "nanoid";
 import { Grid } from "./Grid";
 import type { SheetStore } from "./SheetStore";
@@ -10,9 +10,9 @@ export class Sheet {
   public grid: Grid;
 
   constructor(store: SheetStore) {
-    // TODO: добавь здесь немного магии
     this.store = store;
     this.grid = new Grid(this);
+    makeAutoObservable(this, { store: false, grid: false });
   }
 
   public get isSelected() {
@@ -33,5 +33,6 @@ export class Sheet {
 
   public rename(newName: string) {
     // TODO
+    this.name = newName;
   }
 }

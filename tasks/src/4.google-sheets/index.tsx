@@ -6,11 +6,11 @@ import App from "./src/components/App/App";
 import { SheetStore } from "./src/models/SheetStore";
 
 // Uncomment for helpful linting
-// configure({
-//   enforceActions: "observed",
-//   computedRequiresReaction: true,
-//   observableRequiresReaction: true,
-// });
+configure({
+  enforceActions: "observed",
+  computedRequiresReaction: true,
+  observableRequiresReaction: true,
+});
 
 ReactDOM.render(
   <StrictMode>

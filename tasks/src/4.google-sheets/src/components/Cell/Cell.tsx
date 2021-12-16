@@ -5,13 +5,14 @@ import classes from "./Cell.module.css";
 import cs from "classnames";
 import { useEditing } from "./useEditing";
 import { useSelection } from "./useSelection";
+import { observe } from "mobx";
 
 interface CellProps {
   grid: Grid;
   idx: number;
 }
 
-const Cell: FC<CellProps> = ({ grid, idx }) => {
+const Cell: FC<CellProps> = observer(({ grid, idx }) => {
   const { isEditing, hide, show, onKeyDown } = useEditing();
   const { isSelected, select, ref } = useSelection(grid, idx, isEditing);
   const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -39,6 +40,6 @@ const Cell: FC<CellProps> = ({ grid, idx }) => {
       )}
     </div>
   );
-};
+});
 
 export default Cell;
